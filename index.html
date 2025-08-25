@@ -124,13 +124,6 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
       text-align: center;
     }
-
-    @keyframes flyAcross {
-      0%   { transform: translateX(0) translateY(0) scale(1) rotate(0deg); opacity: 1; }
-      30%  { transform: translateX(400px) translateY(-40px) scale(1.1) rotate(5deg); }
-      60%  { transform: translateX(800px) translateY(20px) scale(1) rotate(-5deg); }
-      100% { transform: translateX(1300px) translateY(-30px) scale(0.9) rotate(0deg); opacity: 0; }
-    }
   </style>
 </head>
 <body>
@@ -197,6 +190,22 @@
       document.getElementById("countdown").innerHTML =
         days+"d "+hours+"h "+minutes+"m "+seconds+"s";
     }, 1000);
+
+    // ✅ Stop music when leaving/closing/tab hidden
+    window.addEventListener("beforeunload", () => {
+      music.pause();
+      music.currentTime = 0;
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        music.pause();
+        music.currentTime = 0;
+      }
+    });
+    window.addEventListener("pagehide", () => {
+      music.pause();
+      music.currentTime = 0;
+    });
   </script>
 </body>
 </html>
