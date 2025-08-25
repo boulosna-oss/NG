@@ -17,14 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    body 
-    <audio id="bg-music" autoplay loop>
-  <source src="romantic-piano1.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-    
-    {
+    body {
       margin: 0;
       padding: 0;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -73,23 +66,37 @@
       }
     }
 
-    /* ✅ Countdown styling */
-   /* ✅ Countdown styling - transparent & elegant */
-#countdown {
-  margin-top: 20px;
-  font-size: 26px;
-  font-weight: bold;
-  color: #eee;            /* soft white/grey */
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* subtle glow for readability */
-  text-align: center;
-}
-
+    /* ✅ Countdown styling - transparent & elegant */
+    #countdown {
+      margin-top: 20px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #eee; /* soft white/grey */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* subtle glow for readability */
+      text-align: center;
+    }
 
     @media (max-width: 600px) {
       #countdown {
         font-size: 18px;
         width: 90%;
       }
+    }
+
+    /* ✅ Music Button */
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #b80f2e;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 9999;
     }
   </style>
 </head>
@@ -109,38 +116,51 @@
   <!-- ✅ Countdown Timer -->
   <div id="countdown"></div>
 
-  <!-- ✅ Countdown Timer -->
-<div id="countdown"></div>
+  <!-- ✅ Music Controls -->
+  <button id="music-btn">🎵 Play Music</button>
+  <audio id="bg-music" loop>
+    <source src="romantic-piano1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-<script>
-  // Set the wedding date
-  const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
+  <script>
+    // Countdown Timer
+    const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
 
-  const timer = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = eventDate - now;
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "💍 The Wedding Day Has Arrived! 🎉";
+        clearInterval(timer);
+        return;
+      }
 
-    if (distance < 0) {
-      document.getElementById("countdown").innerHTML = "💍 The Wedding Day Has Arrived! 🎉";
-      clearInterval(timer);
-      return;
-    }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s 🤍";
+    }, 1000);
 
-    document.getElementById("countdown").innerHTML =
-      days + "d " + hours + "h " + minutes + "m " + seconds + "s 🤍";
-  }, 1000);
-</script>
+    // Music Play/Pause
+    const music = document.getElementById("bg-music");
+    const btn = document.getElementById("music-btn");
+
+    btn.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        btn.innerText = "⏸ Pause Music";
+      } else {
+        music.pause();
+        btn.innerText = "🎵 Play Music";
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
-
 
 
 
