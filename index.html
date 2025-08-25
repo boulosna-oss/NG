@@ -29,6 +29,30 @@
       overflow-x: hidden;
     }
 
+    /* Tap-to-Begin Overlay */
+    #tap-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 20000;
+      cursor: pointer;
+      transition: opacity 1s ease;
+    }
+    #tap-overlay img {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    #tap-overlay p {
+      font-size: 22px;
+      font-weight: bold;
+      color: #b80f2e;
+    }
+
     /* Loader with logo */
     #loader {
       position: fixed;
@@ -56,7 +80,7 @@
 
     .invitation-container {
       position: relative;
-      display: none; /* hidden until loader finishes */
+      display: none; /* hidden until overlay is tapped */
       max-width: 100%;
       animation: fadeIn 2s ease forwards;
     }
@@ -80,16 +104,17 @@
     .rsvp { top: 46.8%; left: 37%; width: 25%; height: .5%; }
     .accommodation { top: 51.5%; left: 35%; width: 30%; height: .5%; }
     .outfit { top: 44%; left: 35%; width: 30%; height: .5%; }
-    /* RSVP Glow */
-.hotspot.rsvp {
-  transition: box-shadow 0.4s ease, transform 0.2s ease;
-}
 
-.hotspot.rsvp:hover {
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); /* soft gold glow */
-  transform: scale(1.05); /* gentle zoom */
-  border-radius: 8px; /* rounded edges for the glow */
-}
+    /* RSVP Glow */
+    .hotspot.rsvp {
+      transition: box-shadow 0.4s ease, transform 0.2s ease;
+    }
+    .hotspot.rsvp:hover {
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+      transform: scale(1.05);
+      border-radius: 8px;
+    }
+
     /* Countdown */
     #countdown {
       margin-top: 20px;
@@ -100,7 +125,6 @@
       text-align: center;
     }
 
-    
     @keyframes flyAcross {
       0%   { transform: translateX(0) translateY(0) scale(1) rotate(0deg); opacity: 1; }
       30%  { transform: translateX(400px) translateY(-40px) scale(1.1) rotate(5deg); }
@@ -110,6 +134,12 @@
   </style>
 </head>
 <body>
+  <!-- Tap-to-Begin Overlay -->
+  <div id="tap-overlay">
+    <img src="logo.png" alt="N&G Logo">
+    <p>Tap to Begin</p>
+  </div>
+
   <!-- Loader with Logo -->
   <div id="loader">
     <img src="logo.png" alt="N&G Logo">
@@ -117,8 +147,6 @@
 
   <!-- Invitation -->
   <div class="invitation-container" id="invite">
-
-    <!-- Main Invitation -->
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
 
     <!-- Hotspots -->
@@ -133,18 +161,24 @@
   <!-- Countdown -->
   <div id="countdown"></div>
 
-  <!-- Hidden Autoplay Music -->
+  <!-- Hidden Music -->
   <audio id="bg-music" loop>
     <source src="romantic-piano1.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Loader -> show invite after 2s
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("invite").style.display = "block";
-      }, 2000);
+    const overlay = document.getElementById("tap-overlay");
+    const invite = document.getElementById("invite");
+    const music = document.getElementById("bg-music");
+
+    // Tap to Begin
+    overlay.addEventListener("click", () => {
+      overlay.style.opacity = "0";
+      setTimeout(() => overlay.style.display = "none", 1000);
+
+      document.getElementById("loader").style.display = "none"; // hide loader
+      invite.style.display = "block"; // show invitation
+      music.play(); // start music
     });
 
     // Countdown
@@ -163,38 +197,6 @@
       document.getElementById("countdown").innerHTML =
         days+"d "+hours+"h "+minutes+"m "+seconds+"s";
     }, 1000);
-
-    // Music Autoplay (Solution 1 - hidden)
-    const music = document.getElementById("bg-music");
-    window.addEventListener("load", () => {
-      music.play().catch(() => {
-        const startMusic = () => {
-          music.play();
-          document.removeEventListener("click", startMusic);
-          document.removeEventListener("touchstart", startMusic);
-        };
-        document.addEventListener("click", startMusic);
-        document.addEventListener("touchstart", startMusic);
-      });
-    });
-
-    // Stop music when user leaves or changes tab
-    window.addEventListener("beforeunload", () => {
-      music.pause();
-      music.currentTime = 0;
-    });
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        music.pause();
-        music.currentTime = 0;
-      }
-    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
