@@ -103,31 +103,35 @@
   <!-- ✅ Countdown Timer -->
   <div id="countdown"></div>
 
-  <script>
-    // Set the wedding date
-    const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
+  <!-- ✅ Countdown Timer -->
+<div id="countdown"></div>
 
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
+<script>
+  // Set the wedding date
+  const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
 
-      if (distance < 0) {
-        document.getElementById("countdown").innerHTML = "💍 The Wedding Day Has Arrived! 🎉";
-        clearInterval(timer);
-        return;
-      }
+  const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if (distance < 0) {
+      document.getElementById("countdown").innerHTML = "💍 The Wedding Day Has Arrived! 🎉";
+      clearInterval(timer);
+      return;
+    }
 
-      document.getElementById("countdown").innerHTML =
-        days + "d " + hours + "h " + minutes + "m " + seconds + "s ❤️";
-    }, 1000);
-  </script>
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s 🤍";
+  }, 1000);
+</script>
 </body>
 </html>
+
 
 
 
