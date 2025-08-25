@@ -8,7 +8,7 @@
   <!-- ✅ Social Preview -->
   <meta property="og:title" content="Nadim & Gareen Wedding Invitation">
   <meta property="og:description" content="Join us in celebrating our wedding – details inside!">
-<meta property="og:image" content="https://boulosna-oss.github.io/NG/NGVFINAL1.jpg">
+  <meta property="og:image" content="https://boulosna-oss.github.io/NG/NGVFINAL1.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boulosna-oss.github.io/NG/">
   <meta name="twitter:card" content="summary_large_image">
@@ -24,60 +24,55 @@
       min-height: 100vh;
       background-color: #f9f9f9;
     }
-    img {
-      max-width: 100%;
+
+    .invitation-container {
+      position: relative;
+      display: inline-block;
+      max-width: 95%;
+    }
+
+    .invitation-container img {
+      width: 100%;
       height: auto;
       display: block;
-      margin: 20px auto;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Transparent clickable overlays */
+    .hotspot {
+      position: absolute;
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+      /* debugging background: rgba(255,0,0,0.2); remove later */
+    }
+
+    /* Example positioning (percent of image) */
+    .church        { top: 21%; left: 40%; width: 20%; height: 4%; }
+    .oasis         { top: 68%; left: 35%; width: 25%; height: 4%; }
+    .riah          { top: 95%; left: 37%; width: 25%; height: 4%; }
+    .rsvp          { top: 98%; left: 37%; width: 25%; height: 4%; }
+    .accommodation { top: 108%; left: 35%; width: 30%; height: 4%; }
+    .outfit        { top: 85%; left: 35%; width: 30%; height: 4%; }
+
+    @media (max-width: 600px) {
+      .hotspot { height: 6%; } /* larger targets on mobile */
     }
   </style>
 </head>
 <body>
-  <!-- ✅ Invitation Image with Clickable Map -->
-  <img src="NGVFINAL1.jpg" alt="Wedding Invitation" usemap="#invitemap">
+  <div class="invitation-container">
+    <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
 
-  <map name="invitemap">
-    <!-- Church -->
-    <area shape="circle" coords="533,1745,50" 
-          href="https://maps.app.goo.gl/ZQKweWGzjHopsQ4M7?g_st=aw" 
-          alt="Church" title="Church" target="_blank">
-
-    <!-- Oasis -->
-    <area shape="rect" coords="400,5500,650,5600" 
-          href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7" 
-          alt="Oasis" title="Oasis" target="_blank">
-
-    <!-- Riah -->
-    <area shape="poly" coords="555,7871,600,7880,580,7960" 
-          href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9" 
-          alt="Riah" title="Riah" target="_blank">
-
-    <!-- RSVP -->
-    <area shape="rect" coords="500,8100,600,8220" 
-          href="https://tally.so/r/wkgg0Z" 
-          alt="RSVP" title="RSVP" target="_blank">
-    <!-- Accommodation -->
-    <area shape="rect" coords="500,8950,570,9020" 
-          href="https://tinyurl.com/Nadim-Gareen" 
-          alt="booknow" title="booknow" target="_blank">
-      <!-- Outfit Inspiration (PDF) -->
-  <area shape="poly" 
-      coords="540,7667,600,7700,580,7770" 
-      href="outfit.pdf" 
-      alt="Outfit inspiration" 
-      title="Outfit inspiration" 
-      target="_blank">
-  </map>
-
-  <!-- ✅ Script to keep map responsive -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      imageMapResize();
-    });
-  </script>
+    <!-- ✅ Clickable overlays -->
+    <a href="https://maps.app.goo.gl/ZQKweWGzjHopsQ4M7?g_st=aw" target="_blank" class="hotspot church"        title="Church"></a>
+    <a href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7"   target="_blank" class="hotspot oasis"         title="Oasis"></a>
+    <a href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9"   target="_blank" class="hotspot riah"          title="Riah"></a>
+    <a href="https://tally.so/r/wkgg0Z"                  target="_blank" class="hotspot rsvp"          title="RSVP"></a>
+    <a href="https://tinyurl.com/Nadim-Gareen"           target="_blank" class="hotspot accommodation" title="Accommodation"></a>
+    <a href="outfit.pdf"                                 target="_blank" class="hotspot outfit"        title="Outfit Inspiration"></a>
+  </div>
 </body>
 </html>
 
