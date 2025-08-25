@@ -8,7 +8,7 @@
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="logo.png">
 
-  <!-- ✅ Social Preview (Facebook/WhatsApp) -->
+  <!-- ✅ Social Preview -->
   <meta property="og:title" content="Nadim & Gareen Wedding Invitation">
   <meta property="og:description" content="Join us in celebrating our wedding – details inside!">
   <meta property="og:image" content="https://boulosna-oss.github.io/NG/logo_banner.png">
@@ -29,14 +29,13 @@
       overflow-x: hidden;
     }
 
-    /* Tap-to-Begin Overlay */
+    /* Elegant Logo Overlay */
     #tap-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: #fff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 20000;
@@ -45,42 +44,22 @@
     }
     #tap-overlay img {
       width: 180px;
-      margin-bottom: 20px;
+      animation: pulse 2.5s infinite;
     }
-    #tap-overlay p {
-      font-size: 22px;
-      font-weight: bold;
-      color: #b80f2e;
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Loader with logo */
+    /* Loader with logo (kept as subtle intro, can remove if wanted) */
     #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-    }
-    #loader img {
-      width: 160px;
-      opacity: 0;
-      animation: fadeLogo 2s ease forwards;
-    }
-    @keyframes fadeLogo {
-      0% { opacity: 0; transform: scale(0.9); }
-      30% { opacity: 1; transform: scale(1); }
-      70% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(1.05); }
+      display: none;
     }
 
     .invitation-container {
       position: relative;
-      display: none; /* hidden until overlay is tapped */
+      display: none;
       max-width: 100%;
       animation: fadeIn 2s ease forwards;
     }
@@ -127,14 +106,8 @@
   </style>
 </head>
 <body>
-  <!-- Tap-to-Begin Overlay -->
+  <!-- Elegant Logo Overlay -->
   <div id="tap-overlay">
-    <img src="logo.png" alt="N&G Logo">
-    <p>Tap to Begin</p>
-  </div>
-
-  <!-- Loader with Logo -->
-  <div id="loader">
     <img src="logo.png" alt="N&G Logo">
   </div>
 
@@ -164,12 +137,11 @@
     const invite = document.getElementById("invite");
     const music = document.getElementById("bg-music");
 
-    // Tap to Begin
+    // Tap logo to enter
     overlay.addEventListener("click", () => {
       overlay.style.opacity = "0";
       setTimeout(() => overlay.style.display = "none", 1000);
 
-      document.getElementById("loader").style.display = "none"; // hide loader
       invite.style.display = "block"; // show invitation
       music.play(); // start music
     });
@@ -191,7 +163,7 @@
         days+"d "+hours+"h "+minutes+"m "+seconds+"s";
     }, 1000);
 
-    // ✅ Stop music when leaving/closing/tab hidden
+    // Stop music when leaving/closing/tab hidden
     window.addEventListener("beforeunload", () => {
       music.pause();
       music.currentTime = 0;
@@ -209,3 +181,4 @@
   </script>
 </body>
 </html>
+
