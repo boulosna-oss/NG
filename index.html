@@ -99,7 +99,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(184, 15, 46, 0.6); /* semi-transparent deep red */
+      background: rgba(184, 15, 46, 0.6);
       color: #fff;
       border: none;
       padding: 10px 15px;
@@ -166,7 +166,7 @@
         document.getElementById("loader").style.display = "none";
         document.getElementById("invite").style.display = "block";
 
-        // 🌸 Romantic petals (instead of confetti)
+        // 🌸 Romantic petals
         for (let i = 0; i < 30; i++) {
           let petal = document.createElement("div");
           petal.classList.add("petal");
@@ -178,7 +178,7 @@
 
           setTimeout(() => { petal.remove(); }, 10000);
         }
-      }, 1500); // Loader stays for 1.5s
+      }, 1500); // Loader shows for 1.5s
     });
 
     // Countdown
@@ -202,9 +202,22 @@
         days + "d " + hours + "h " + minutes + "m " + seconds + "s 🤍";
     }, 1000);
 
-    // Music
+    // Music Autoplay (Solution 1)
     const music = document.getElementById("bg-music");
     const btn = document.getElementById("music-btn");
+
+    window.addEventListener("load", () => {
+      music.play().catch(() => {
+        // if blocked, wait for first user interaction
+        const startMusic = () => {
+          music.play();
+          document.removeEventListener("click", startMusic);
+          document.removeEventListener("touchstart", startMusic);
+        };
+        document.addEventListener("click", startMusic);
+        document.addEventListener("touchstart", startMusic);
+      });
+    });
 
     btn.addEventListener("click", () => {
       if (music.paused) {
@@ -218,6 +231,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
