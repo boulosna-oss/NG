@@ -125,40 +125,6 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
       text-align: center;
     }
-
-    /* Music Button */
-    #music-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(184, 15, 46, 0.6);
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 9999;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    #music-btn:hover { background: rgba(184, 15, 46, 0.9); transform: scale(1.05); }
-
-    /* Falling White + Gold Petals */
-    .petal {
-      position: fixed;
-      top: -50px;
-      font-size: 22px;
-      animation: fall linear forwards;
-      pointer-events: none;
-      z-index: 9998;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -186,8 +152,7 @@
   <!-- Countdown -->
   <div id="countdown"></div>
 
-  <!-- Music Controls -->
-  <button id="music-btn">🎵 Play Music</button>
+  <!-- Hidden Autoplay Music -->
   <audio id="bg-music" loop>
     <source src="romantic-piano1.mp3" type="audio/mpeg">
   </audio>
@@ -198,19 +163,6 @@
       setTimeout(() => {
         document.getElementById("loader").style.display = "none";
         document.getElementById("invite").style.display = "block";
-
-        // Continuous White + Gold Petals
-        setInterval(() => {
-          let petal = document.createElement("div");
-          petal.classList.add("petal");
-          petal.innerHTML = Math.random() > 0.5 ? "🤍" : "✨";
-          petal.style.left = Math.random() * 100 + "vw";
-          petal.style.animationDuration = (5 + Math.random() * 7) + "s";
-          petal.style.fontSize = (16 + Math.random() * 24) + "px";
-          document.body.appendChild(petal);
-
-          setTimeout(() => { petal.remove(); }, 12000);
-        }, 400); // new petal every 0.4s
       }, 2200); // envelope animation lasts ~2.2s
     });
 
@@ -231,9 +183,8 @@
         days+"d "+hours+"h "+minutes+"m "+seconds+"s 🤍";
     }, 1000);
 
-    // Music Autoplay (Solution 1)
+    // Music Autoplay (Solution 1 - hidden)
     const music = document.getElementById("bg-music");
-    const btn = document.getElementById("music-btn");
     window.addEventListener("load", () => {
       music.play().catch(() => {
         const startMusic = () => {
@@ -245,10 +196,7 @@
         document.addEventListener("touchstart", startMusic);
       });
     });
-    btn.addEventListener("click", () => {
-      if (music.paused) { music.play(); btn.innerText="⏸ Pause Music"; }
-      else { music.pause(); btn.innerText="🎵 Play Music"; }
-    });
   </script>
 </body>
 </html>
+
