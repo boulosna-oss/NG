@@ -80,7 +80,16 @@
     .rsvp { top: 46.8%; left: 37%; width: 25%; height: .5%; }
     .accommodation { top: 51.5%; left: 35%; width: 30%; height: .5%; }
     .outfit { top: 44%; left: 35%; width: 30%; height: .5%; }
+    /* RSVP Glow */
+.hotspot.rsvp {
+  transition: box-shadow 0.4s ease, transform 0.2s ease;
+}
 
+.hotspot.rsvp:hover {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); /* soft gold glow */
+  transform: scale(1.05); /* gentle zoom */
+  border-radius: 8px; /* rounded edges for the glow */
+}
     /* Countdown */
     #countdown {
       margin-top: 20px;
@@ -119,17 +128,6 @@
     <a href="https://tally.so/r/wkgg0Z" target="_blank" class="hotspot rsvp" title="RSVP"></a>
     <a href="https://tinyurl.com/Nadim-Gareen" target="_blank" class="hotspot accommodation" title="Accommodation"></a>
     <a href="outfit.pdf" target="_blank" class="hotspot outfit" title="Outfit Inspiration"></a>
-    /* RSVP Glow */
-.hotspot.rsvp {
-  transition: box-shadow 0.4s ease, transform 0.2s ease;
-}
-
-.hotspot.rsvp:hover {
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); /* soft gold glow */
-  transform: scale(1.05); /* gentle zoom */
-  border-radius: 8px; /* rounded edges for the glow */
-}
-
   </div>
 
   <!-- Countdown -->
@@ -194,6 +192,7 @@
   </script>
 </body>
 </html>
+
 
 
 
