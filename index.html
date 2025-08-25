@@ -4,23 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>N & G Wedding Invitation</title>
+
+  <!-- ✅ Social Preview (Open Graph + Twitter) -->
+  <meta property="og:title" content="N & G Wedding Invitation">
+  <meta property="og:description" content="Join us in celebrating our wedding – details inside!">
+  <meta property="og:image" content="https://boulosna-oss.github.io/NG/NGV1.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://boulosna-oss.github.io/NG/">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
     body {
       margin: 0;
       padding: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
       background-color: #f9f9f9;
     }
     img {
-      max-width: 100%;
+      max-width: 95%;
       height: auto;
       display: block;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .rsvp-button {
+      margin-top: 20px;
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #b80f2e, #e63946);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .rsvp-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .rsvp-button {
+        width: 90%;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
   <img src="NGV1.jpg" alt="Wedding Invitation">
+
+  <!-- ✅ RSVP button -->
+  <a href="https://forms.gle/YOUR_FORM_LINK" target="_blank" class="rsvp-button">
+    RSVP Now
+  </a>
 </body>
 </html>
