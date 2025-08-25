@@ -27,12 +27,31 @@
       align-items: center;
       min-height: 100vh;
       background-color: #f9f9f9;
+      overflow-x: hidden;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #b80f2e;
+      z-index: 10000;
     }
 
     .invitation-container {
       position: relative;
-      display: inline-block;
+      display: none; /* hidden until loader finishes */
       max-width: 95%;
+      animation: fadeIn 2s ease forwards;
     }
 
     .invitation-container img {
@@ -43,16 +62,19 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hotspot {
       position: absolute;
       display: block;
       cursor: pointer;
       text-decoration: none;
-      /* For testing: uncomment to see the clickable zones */
-      /* background: rgba(255,0,0,0.3); */
     }
 
-    /* Hotspot positions (adjust as needed) */
+    /* Hotspot positions */
     .church { top: 10%; left: 40%; width: 20%; height: .5%; }
     .oasis { top: 32%; left: 35%; width: 25%; height: .5%; }
     .riah { top: 45.2%; left: 37%; width: 25%; height: .5%; }
@@ -60,48 +82,60 @@
     .accommodation { top: 51.5%; left: 35%; width: 30%; height: .5%; }
     .outfit { top: 44%; left: 35%; width: 30%; height: .5%; }
 
-    @media (max-width: 600px) {
-      .hotspot {
-        height: 1%; /* slightly bigger tap zones for mobile */
-      }
-    }
-
-    /* ✅ Countdown styling - transparent & elegant */
+    /* Countdown */
     #countdown {
       margin-top: 20px;
       font-size: 26px;
       font-weight: bold;
-      color: #eee; /* soft white/grey */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* subtle glow for readability */
+      color: #eee;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
       text-align: center;
     }
 
-    @media (max-width: 600px) {
-      #countdown {
-        font-size: 18px;
-        width: 90%;
-      }
-    }
+    /* Music Button */
+#music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(184, 15, 46, 0.6); /* semi-transparent deep red */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    /* ✅ Music Button */
-    #music-btn {
+#music-btn:hover {
+  background: rgba(184, 15, 46, 0.9); /* darker when hovered */
+  transform: scale(1.05);
+}
+
+
+    /* Confetti Canvas */
+    #confetti-canvas {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #b80f2e;
-      color: #eee;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
     }
   </style>
 </head>
 <body>
-  <div class="invitation-container">
+  <!-- Loader -->
+  <div id="loader">N ❤️ G</div>
+
+  <!-- Confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Invitation -->
+  <div class="invitation-container" id="invite">
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
 
     <!-- ✅ Clickable overlays -->
@@ -113,18 +147,50 @@
     <a href="outfit.pdf" target="_blank" class="hotspot outfit" title="Outfit Inspiration"></a>
   </div>
 
-  <!-- ✅ Countdown Timer -->
+  <!-- Countdown -->
   <div id="countdown"></div>
 
-  <!-- ✅ Music Controls -->
+  <!-- Music Controls -->
   <button id="music-btn">🎵 Play Music</button>
   <audio id="bg-music" loop>
     <source src="romantic-piano1.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    // Countdown Timer
+    // Loader
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("invite").style.display = "block";
+
+        // 🎉 Confetti burst
+        const duration = 3 * 1000;
+        const end = Date.now() + duration;
+
+        (function frame() {
+          confetti({
+            particleCount: 5,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+          });
+          confetti({
+            particleCount: 5,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+          });
+
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
+      }, 1500); // Loader stays for 1.5s
+    });
+
+    // Countdown
     const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -145,7 +211,7 @@
         days + "d " + hours + "h " + minutes + "m " + seconds + "s 🤍";
     }, 1000);
 
-    // Music Play/Pause
+    // Music
     const music = document.getElementById("bg-music");
     const btn = document.getElementById("music-btn");
 
@@ -161,7 +227,6 @@
   </script>
 </body>
 </html>
-
 
 
 
