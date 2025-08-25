@@ -52,11 +52,6 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Loader with logo (kept as subtle intro, can remove if wanted) */
-    #loader {
-      display: none;
-    }
-
     .invitation-container {
       position: relative;
       display: none;
@@ -163,22 +158,14 @@
         days+"d "+hours+"h "+minutes+"m "+seconds+"s";
     }, 1000);
 
-    // Stop music when leaving/closing/tab hidden
-    window.addEventListener("beforeunload", () => {
-      music.pause();
-      music.currentTime = 0;
-    });
+    // ✅ Stop music when leaving & resume on return
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         music.pause();
-        music.currentTime = 0;
+      } else {
+        music.play().catch(() => {}); // resume when user returns
       }
-    });
-    window.addEventListener("pagehide", () => {
-      music.pause();
-      music.currentTime = 0;
     });
   </script>
 </body>
 </html>
-
