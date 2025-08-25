@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>N & G Wedding Invitation</title>
+  <title>NadimXGareen</title>
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="logo.png">
@@ -29,27 +29,56 @@
       overflow-x: hidden;
     }
 
-    /* Elegant Logo Overlay */
+    /* Overlay */
     #tap-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: #fff;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 20000;
-      cursor: pointer;
       transition: opacity 1s ease;
+      text-align: center;
     }
-    #tap-overlay img {
-      width: 180px;
-      animation: pulse 2.5s infinite;
+
+    /* Wax Seal Style */
+    #enter-btn {
+      background: radial-gradient(circle at 30% 30%, #FFD700, #C9A400);
+      border: none;
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.8),
+                  inset 0 0 20px rgba(255, 255, 255, 0.4);
+      animation: glow 2s infinite alternate;
+      transition: transform 0.2s ease;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.08); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 1; }
+    #enter-btn:hover {
+      transform: scale(1.05);
+    }
+
+    #enter-btn img {
+      width: 110px;
+      height: auto;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255,255,255,0.3); }
+      to   { box-shadow: 0 0 35px rgba(255, 215, 0, 1), inset 0 0 20px rgba(255,255,255,0.5); }
+    }
+
+    #tap-overlay p {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #b80f2e;
     }
 
     .invitation-container {
@@ -101,9 +130,12 @@
   </style>
 </head>
 <body>
-  <!-- Elegant Logo Overlay -->
+  <!-- Overlay with Wax Seal Button -->
   <div id="tap-overlay">
-    <img src="logo.png" alt="N&G Logo">
+    <button id="enter-btn">
+      <img src="logo.png" alt="N&G Logo">
+    </button>
+    <p>Enter Our Story</p>
   </div>
 
   <!-- Invitation -->
@@ -122,7 +154,7 @@
   <!-- Countdown -->
   <div id="countdown"></div>
 
-  <!-- Hidden Music -->
+  <!-- Music -->
   <audio id="bg-music" loop>
     <source src="romantic-piano1.mp3" type="audio/mpeg">
   </audio>
@@ -131,9 +163,10 @@
     const overlay = document.getElementById("tap-overlay");
     const invite = document.getElementById("invite");
     const music = document.getElementById("bg-music");
+    const enterBtn = document.getElementById("enter-btn");
 
-    // Tap logo to enter
-    overlay.addEventListener("click", () => {
+    // Button click to enter
+    enterBtn.addEventListener("click", () => {
       overlay.style.opacity = "0";
       setTimeout(() => overlay.style.display = "none", 1000);
 
@@ -158,12 +191,12 @@
         days+"d "+hours+"h "+minutes+"m "+seconds+"s";
     }, 1000);
 
-    // ✅ Stop music when leaving & resume on return
+    // Pause on leave, resume on return
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         music.pause();
       } else {
-        music.play().catch(() => {}); // resume when user returns
+        music.play().catch(() => {});
       }
     });
   </script>
