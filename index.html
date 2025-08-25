@@ -39,25 +39,62 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* Transparent clickable overlays */
     .hotspot {
       position: absolute;
       display: block;
       cursor: pointer;
       text-decoration: none;
-      /* debugging background: rgba(255,0,0,0.2); remove later */
+      /* For testing: uncomment to see the clickable zones */
+      /* background: rgba(255,0,0,0.3); */
     }
 
-    /* Example positioning (percent of image) */
-    .church        { top: 21%; left: 40%; width: 20%; height: 4%; }
-    .oasis         { top: 68%; left: 35%; width: 25%; height: 4%; }
-    .riah          { top: 95%; left: 37%; width: 25%; height: 4%; }
-    .rsvp          { top: 98%; left: 37%; width: 25%; height: 4%; }
-    .accommodation { top: 108%; left: 35%; width: 30%; height: 4%; }
-    .outfit        { top: 85%; left: 35%; width: 30%; height: 4%; }
+    /* Hotspot positions (adjust as needed) */
+    .church {
+      top: 10%;
+      left: 40%;
+      width: 20%;
+      height: 2%;
+    }
+
+    .oasis {
+      top: 32%;
+      left: 35%;
+      width: 25%;
+      height: 4%;
+    }
+
+    .riah {
+      top: 45.2%;
+      left: 37%;
+      width: 25%;
+      height: 4%;
+    }
+
+    .rsvp {
+      top: 46.5%;
+      left: 37%;
+      width: 25%;
+      height: 4%;
+    }
+
+    .accommodation {
+      top: 51.5%;
+      left: 35%;
+      width: 30%;
+      height: 4%;
+    }
+
+    .outfit {
+      top: 44%;
+      left: 35%;
+      width: 30%;
+      height: 4%;
+    }
 
     @media (max-width: 600px) {
-      .hotspot { height: 6%; } /* larger targets on mobile */
+      .hotspot {
+        height: 6%; /* slightly bigger tap zones for mobile */
+      }
     }
   </style>
 </head>
@@ -66,12 +103,12 @@
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
 
     <!-- ✅ Clickable overlays -->
-    <a href="https://maps.app.goo.gl/ZQKweWGzjHopsQ4M7?g_st=aw" target="_blank" class="hotspot church"        title="Church"></a>
-    <a href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7"   target="_blank" class="hotspot oasis"         title="Oasis"></a>
-    <a href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9"   target="_blank" class="hotspot riah"          title="Riah"></a>
-    <a href="https://tally.so/r/wkgg0Z"                  target="_blank" class="hotspot rsvp"          title="RSVP"></a>
-    <a href="https://tinyurl.com/Nadim-Gareen"           target="_blank" class="hotspot accommodation" title="Accommodation"></a>
-    <a href="outfit.pdf"                                 target="_blank" class="hotspot outfit"        title="Outfit Inspiration"></a>
+    <a href="https://maps.app.goo.gl/ZQKweWGzjHopsQ4M7?g_st=aw" target="_blank" class="hotspot church" title="Church"></a>
+    <a href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7" target="_blank" class="hotspot oasis" title="Oasis"></a>
+    <a href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9" target="_blank" class="hotspot riah" title="Riah"></a>
+    <a href="https://tally.so/r/wkgg0Z" target="_blank" class="hotspot rsvp" title="RSVP"></a>
+    <a href="https://tinyurl.com/Nadim-Gareen" target="_blank" class="hotspot accommodation" title="Accommodation"></a>
+    <a href="outfit.pdf" target="_blank" class="hotspot outfit" title="Outfit Inspiration"></a>
   </div>
 </body>
 </html>
