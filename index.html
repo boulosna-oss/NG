@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NadimXGareen</title>
+  <title>N & G Wedding Invitation</title>
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="logo.png">
@@ -29,56 +29,27 @@
       overflow-x: hidden;
     }
 
-    /* Overlay */
+    /* Logo Only Overlay */
     #tap-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: #fff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 20000;
-      transition: opacity 1s ease;
-      text-align: center;
-    }
-
-    /* Wax Seal Style */
-    #enter-btn {
-      background: radial-gradient(circle at 30% 30%, #FFD700, #C9A400);
-      border: none;
-      border-radius: 50%;
-      width: 200px;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       cursor: pointer;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.8),
-                  inset 0 0 20px rgba(255, 255, 255, 0.4);
-      animation: glow 2s infinite alternate;
-      transition: transform 0.2s ease;
+      transition: opacity 1s ease;
     }
-    #enter-btn:hover {
-      transform: scale(1.05);
+    #tap-overlay img {
+      width: 180px;
+      animation: pulse 2.5s infinite;
     }
-
-    #enter-btn img {
-      width: 110px;
-      height: auto;
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255,255,255,0.3); }
-      to   { box-shadow: 0 0 35px rgba(255, 215, 0, 1), inset 0 0 20px rgba(255,255,255,0.5); }
-    }
-
-    #tap-overlay p {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: bold;
-      color: #b80f2e;
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .invitation-container {
@@ -130,12 +101,9 @@
   </style>
 </head>
 <body>
-  <!-- Overlay with Wax Seal Button -->
+  <!-- Logo Only Overlay -->
   <div id="tap-overlay">
-    <button id="enter-btn">
-      <img src="logo.png" alt="N&G Logo">
-    </button>
-    <p>Enter Our Story</p>
+    <img src="logo.png" alt="N&G Logo">
   </div>
 
   <!-- Invitation -->
@@ -163,10 +131,9 @@
     const overlay = document.getElementById("tap-overlay");
     const invite = document.getElementById("invite");
     const music = document.getElementById("bg-music");
-    const enterBtn = document.getElementById("enter-btn");
 
-    // Button click to enter
-    enterBtn.addEventListener("click", () => {
+    // Tap logo to enter
+    overlay.addEventListener("click", () => {
       overlay.style.opacity = "0";
       setTimeout(() => overlay.style.display = "none", 1000);
 
