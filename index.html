@@ -8,9 +8,6 @@
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -25,73 +22,8 @@
       overflow-x: hidden;
     }
 
-    /* ✉️ Envelope Loader */
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-    }
-    .envelope {
-      position: relative;
-      width: 200px;
-      height: 120px;
-      background: #b80f2e;
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      animation: openEnvelope 2s ease forwards;
-    }
-    .flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 120px;
-      background: #a00c26;
-      transform-origin: top;
-      animation: flapOpen 2s ease forwards;
-      z-index: 2;
-    }
-    .letter {
-      position: absolute;
-      top: 20px;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Great Vibes', cursive;
-      font-size: 42px;
-      color: #b80f2e;
-      z-index: 1;
-      opacity: 0;
-      animation: showLetter 2s ease forwards;
-    }
-    @keyframes flapOpen {
-      0% { transform: rotateX(0deg); }
-      100% { transform: rotateX(-180deg); }
-    }
-    @keyframes showLetter {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes openEnvelope {
-      0% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
     .invitation-container {
       position: relative;
-      display: none;
       max-width: 95%;
       animation: fadeIn 2s ease forwards;
     }
@@ -128,14 +60,6 @@
   </style>
 </head>
 <body>
-  <!-- Loader Envelope -->
-  <div id="loader">
-    <div class="envelope">
-      <div class="flap"></div>
-      <div class="letter">N ❤️ G</div>
-    </div>
-  </div>
-
   <!-- Invitation -->
   <div class="invitation-container" id="invite">
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
@@ -158,14 +82,6 @@
   </audio>
 
   <script>
-    // Loader -> show invite after animation
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("invite").style.display = "block";
-      }, 2200); // envelope animation lasts ~2.2s
-    });
-
     // Countdown
     const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
     setInterval(() => {
@@ -196,7 +112,20 @@
         document.addEventListener("touchstart", startMusic);
       });
     });
+
+    // Stop music when user leaves or closes page
+    window.addEventListener("beforeunload", () => {
+      music.pause();
+      music.currentTime = 0;
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        music.pause();
+        music.currentTime = 0;
+      }
+    });
   </script>
 </body>
 </html>
+
 
