@@ -24,77 +24,48 @@
       min-height: 100vh;
       background-color: #f9f9f9;
     }
-
-    .invitation-container {
-      position: relative;
-      display: inline-block;
+    img {
       max-width: 95%;
-    }
-
-    .invitation-container img {
-      width: 100%;
       height: auto;
+      display: block;
+      margin: 20px auto;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: block;
-    }
-
-    .overlay-button {
-      position: absolute;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #fff;
-      background: #0077cc;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .overlay-button:hover {
-      background: #005fa3;
-    }
-
-    /* Example positions (adjust % values as needed) */
-    .church {
-      top: 55%;
-      left: 15%;
-    }
-
-    .ceremony {
-      top: 65%;
-      left: 15%;
-    }
-
-    .afterparty {
-      top: 75%;
-      left: 15%;
-    }
-
-    .rsvp {
-      top: 85%;
-      left: 15%;
-      background: linear-gradient(135deg, #b80f2e, #e63946);
-    }
-
-    @media (max-width: 600px) {
-      .overlay-button {
-        font-size: 12px;
-        padding: 8px 14px;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="invitation-container">
-    <img src="NGV1.jpg" alt="Wedding Invitation">
+  <!-- ✅ Invitation Image with Clickable Map -->
+  <img src="NGV1.jpg" alt="Wedding Invitation" usemap="#invitemap">
 
-    <!-- ✅ Buttons overlayed on image -->
-    <a href="https://maps.app.goo.gl/ZQKweWGzjHopsQ4M7?g_st=aw" target="_blank" class="overlay-button church"> Church</a>
-    <a href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7" target="_blank" class="overlay-button ceremony"> Reception</a>
-    <a href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9" target="_blank" class="overlay-button afterparty"> After-Party</a>
-    <a href="https://tally.so/r/wkgg0Z" target="_blank" class="overlay-button rsvp">RSVP Now</a>
-  </div>
+  <map name="invitemap">
+    <!-- Church -->
+    <area shape="circle" coords="533,1745,27" 
+          href="https://maps.app.goo.gl/YOURCHURCH" 
+          alt="Church" title="Church" target="_blank">
+
+    <!-- Oasis -->
+    <area shape="rect" coords="400,5500,650,5600" 
+          href="https://maps.app.goo.gl/YOUROASIS" 
+          alt="Oasis" title="Oasis" target="_blank">
+
+    <!-- Riah -->
+    <area shape="poly" coords="555,7891,600,7900,580,7950" 
+          href="https://maps.app.goo.gl/YOURRIAH" 
+          alt="Riah" title="Riah" target="_blank">
+
+    <!-- RSVP -->
+    <area shape="rect" coords="500,8100,600,8200" 
+          href="https://tally.so/r/wkgg0Z" 
+          alt="RSVP" title="RSVP" target="_blank">
+  </map>
+
+  <!-- ✅ Script to keep map responsive -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      imageMapResize();
+    });
+  </script>
 </body>
 </html>
-
