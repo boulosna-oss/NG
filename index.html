@@ -8,6 +8,15 @@
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
+  <!-- ✅ Social Preview -->
+  <meta property="og:title" content="Nadim & Gareen Wedding Invitation">
+  <meta property="og:description" content="Join us in celebrating our wedding – details inside!">
+  <meta property="og:image" content="https://boulosna-oss.github.io/NG/logo.png"> <!-- logo for social media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nadimxgareen.love/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://boulosna-oss.github.io/NG/logo.png">
+
   <style>
     body {
       margin: 0;
@@ -22,8 +31,34 @@
       overflow-x: hidden;
     }
 
+    /* Loader with logo */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    #loader img {
+      width: 160px; /* adjust logo size */
+      opacity: 0;
+      animation: fadeLogo 2s ease forwards;
+    }
+    @keyframes fadeLogo {
+      0% { opacity: 0; transform: scale(0.9); }
+      30% { opacity: 1; transform: scale(1); }
+      70% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.05); }
+    }
+
     .invitation-container {
       position: relative;
+      display: none; /* hidden until loader finishes */
       max-width: 95%;
       animation: fadeIn 2s ease forwards;
     }
@@ -60,6 +95,11 @@
   </style>
 </head>
 <body>
+  <!-- Loader with Logo -->
+  <div id="loader">
+    <img src="logo.png" alt="N&G Logo">
+  </div>
+
   <!-- Invitation -->
   <div class="invitation-container" id="invite">
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
@@ -82,6 +122,14 @@
   </audio>
 
   <script>
+    // Loader -> show invite after 2s
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("invite").style.display = "block";
+      }, 2000);
+    });
+
     // Countdown
     const eventDate = new Date("Nov 28, 2025 00:00:00").getTime();
     setInterval(() => {
@@ -113,7 +161,7 @@
       });
     });
 
-    // Stop music when user leaves or closes page
+    // Stop music when user leaves or changes tab
     window.addEventListener("beforeunload", () => {
       music.pause();
       music.currentTime = 0;
@@ -127,6 +175,7 @@
   </script>
 </body>
 </html>
+
 
 
 
