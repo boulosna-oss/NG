@@ -57,7 +57,7 @@
     .invitation-container {
       position: relative;
       display: none; /* hidden until loader finishes */
-      max-width: 95%;
+      max-width: 100%;
       animation: fadeIn 2s ease forwards;
     }
     .invitation-container img {
@@ -91,16 +91,7 @@
       text-align: center;
     }
 
-    /* 🕊️ Dove Animation */
-    #dove {
-      position: absolute;
-      top: 5%;
-      left: -200px; /* start off-screen */
-      width: 150px;
-      animation: flyAcross 8s ease-in-out forwards;
-      z-index: 10;
-      pointer-events: none;
-    }
+    
     @keyframes flyAcross {
       0%   { transform: translateX(0) translateY(0) scale(1) rotate(0deg); opacity: 1; }
       30%  { transform: translateX(400px) translateY(-40px) scale(1.1) rotate(5deg); }
@@ -117,8 +108,6 @@
 
   <!-- Invitation -->
   <div class="invitation-container" id="invite">
-    <!-- 🕊️ Flying Dove -->
-   <img id="dove" src="dove_clean.png" alt="Flying Dove">
 
     <!-- Main Invitation -->
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
@@ -194,5 +183,6 @@
   </script>
 </body>
 </html>
+
 
 
