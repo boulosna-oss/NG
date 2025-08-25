@@ -6,14 +6,14 @@
   <title>N & G Wedding Invitation</title>
 
   <!-- ✅ Favicon -->
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- ✅ Social Preview -->
+  <!-- ✅ Social Preview (Facebook/WhatsApp) -->
   <meta property="og:title" content="Nadim & Gareen Wedding Invitation">
   <meta property="og:description" content="Join us in celebrating our wedding – details inside!">
-<meta property="og:image" content="https://boulosna-oss.github.io/NG/logo_banner.png">
-<meta property="og:url" content="https://www.nadimxgareen.love/">
- 
+  <meta property="og:image" content="https://boulosna-oss.github.io/NG/logo_banner.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nadimxgareen.love/">
 
   <style>
     body {
@@ -43,7 +43,7 @@
       z-index: 10000;
     }
     #loader img {
-      width: 160px; /* adjust logo size */
+      width: 160px;
       opacity: 0;
       animation: fadeLogo 2s ease forwards;
     }
@@ -57,8 +57,8 @@
     .invitation-container {
       position: relative;
       display: none; /* hidden until loader finishes */
-      max-width: 100%;
-      animation: fadeIn 1s ease forwards;
+      max-width: 95%;
+      animation: fadeIn 2s ease forwards;
     }
     .invitation-container img {
       width: 100%;
@@ -86,9 +86,26 @@
       margin-top: 20px;
       font-size: 26px;
       font-weight: bold;
-      color: #314420;
+      color: #eee;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
       text-align: center;
+    }
+
+    /* 🕊️ Dove Animation */
+    #dove {
+      position: absolute;
+      top: 5%;
+      left: -200px; /* start off-screen */
+      width: 150px;
+      animation: flyAcross 8s ease-in-out forwards;
+      z-index: 10;
+      pointer-events: none;
+    }
+    @keyframes flyAcross {
+      0%   { transform: translateX(0) translateY(0) scale(1) rotate(0deg); opacity: 1; }
+      30%  { transform: translateX(400px) translateY(-40px) scale(1.1) rotate(5deg); }
+      60%  { transform: translateX(800px) translateY(20px) scale(1) rotate(-5deg); }
+      100% { transform: translateX(1300px) translateY(-30px) scale(0.9) rotate(0deg); opacity: 0; }
     }
   </style>
 </head>
@@ -100,6 +117,10 @@
 
   <!-- Invitation -->
   <div class="invitation-container" id="invite">
+    <!-- 🕊️ Flying Dove -->
+    <img id="dove" src="dove.png" alt="Flying Dove">
+
+    <!-- Main Invitation -->
     <img src="NGVFINAL1.jpg" alt="Wedding Invitation">
 
     <!-- Hotspots -->
@@ -142,7 +163,7 @@
       const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
       const seconds = Math.floor((distance % (1000*60))/1000);
       document.getElementById("countdown").innerHTML =
-        days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+        days+"d "+hours+"h "+minutes+"m "+seconds+"s 🤍";
     }, 1000);
 
     // Music Autoplay (Solution 1 - hidden)
@@ -173,11 +194,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
