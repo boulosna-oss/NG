@@ -19,79 +19,81 @@
       padding: 0;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       background-color: #f9f9f9;
     }
-    img {
+
+    .invitation-container {
+      position: relative;
+      display: inline-block;
       max-width: 95%;
+    }
+
+    .invitation-container img {
+      width: 100%;
       height: auto;
-      display: block;
-      margin: 20px auto;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: block;
     }
-    .button {
-      margin-top: 15px;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(135deg, #b80f2e, #e63946);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-block;
-      text-align: center;
-    }
-    .button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 20px;
-      width: 90%;
-      max-width: 400px;
-    }
-    .location-button {
-      padding: 12px 20px;
-      font-size: 16px;
+
+    .overlay-button {
+      position: absolute;
+      padding: 10px 18px;
+      font-size: 14px;
       font-weight: bold;
       color: #fff;
       background: #0077cc;
-      border-radius: 8px;
+      border-radius: 6px;
       text-decoration: none;
-      text-align: center;
       transition: background 0.3s;
     }
-    .location-button:hover {
+
+    .overlay-button:hover {
       background: #005fa3;
     }
+
+    /* Example positions (adjust % values as needed) */
+    .church {
+      top: 55%;
+      left: 15%;
+    }
+
+    .ceremony {
+      top: 65%;
+      left: 15%;
+    }
+
+    .afterparty {
+      top: 75%;
+      left: 15%;
+    }
+
+    .rsvp {
+      top: 85%;
+      left: 15%;
+      background: linear-gradient(135deg, #b80f2e, #e63946);
+    }
+
     @media (max-width: 600px) {
-      .button, .location-button {
-        width: 100%;
+      .overlay-button {
+        font-size: 12px;
+        padding: 8px 14px;
       }
     }
   </style>
 </head>
 <body>
-  <img src="NGV1.jpg" alt="Wedding Invitation">
+  <div class="invitation-container">
+    <img src="NGV1.jpg" alt="Wedding Invitation">
 
-  <!-- ✅ RSVP Button -->
-  <a href="https://tally.so/r/wkgg0Z" target="_blank" class="button">RSVP Now</a>
-
-  <!-- ✅ Location Buttons -->
-  <div class="links">
-    <a href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7" target="_blank" class="location-button">📍 Ceremony Location</a>
-    <a href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9" target="_blank" class="location-button">🎉 After-Party Location</a>
+    <!-- ✅ Buttons overlayed on image -->
+    <a href="https://maps.app.goo.gl/YOURCHURCHLINK" target="_blank" class="overlay-button church">⛪ Church</a>
+    <a href="https://maps.app.goo.gl/hTUUWhsSGGaYTgAA7" target="_blank" class="overlay-button ceremony">📍 Ceremony</a>
+    <a href="https://maps.app.goo.gl/Taur2JZ4g4Ja76VH9" target="_blank" class="overlay-button afterparty">🎉 After-Party</a>
+    <a href="https://tally.so/r/wkgg0Z" target="_blank" class="overlay-button rsvp">RSVP Now</a>
   </div>
 </body>
 </html>
-
